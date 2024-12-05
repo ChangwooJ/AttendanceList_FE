@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const UserManage = ({ option }) => {
-    const navigate = useNavigate();
-
     const [userData, setUserData] = useState({
         username: '',
         color: '',
@@ -17,7 +14,7 @@ const UserManage = ({ option }) => {
     const uploadUser = () => {
         console.log(userData);
         if(option === 'insert') {
-            axios.post('http://localhost:8000/api/newuser', {
+            axios.post('https://attendancelist-be-4b43ae319fcf.herokuapp.com//api/newuser', {
                 username: userData.username,
                 color: userData.color,
             })

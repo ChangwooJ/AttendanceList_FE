@@ -9,7 +9,7 @@ const UserList = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/userlist');
+                const response = await axios.get('https://attendancelist-be-4b43ae319fcf.herokuapp.com//api/userlist');
                 setUserList(response.data);
             }
             catch (err) {
@@ -37,7 +37,7 @@ const UserList = () => {
 
     const deleteUser = async (username) => {
         try {
-            await axios.delete(`http://localhost:8000/api/deleteUser/${username}`);
+            await axios.delete(`https://attendancelist-be-4b43ae319fcf.herokuapp.com//api/deleteUser/${username}`);
             setUserList(prevUserList => prevUserList.filter(user => user.username !== username));
             alert("삭제되었습니다.");
         } catch (error) {

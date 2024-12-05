@@ -8,11 +8,10 @@ const AttendanceManage = () => {
     const [result, setResult] = useState("");
     const [userList, setUserList] = useState([]);
     const [bestMatch, setBestMatch] = useState("");
-    const [attendanceList, setAttendanceList] = useState([]);
 
     const fetchUserList = async () => {
         try {
-            const response = await axios.get("http://localhost:8000/api/userlist");
+            const response = await axios.get("https://attendancelist-be-4b43ae319fcf.herokuapp.com//api/userlist");
             setUserList(response.data); 
         } catch (error) {
             console.error("유저 목록 불러오기 실패:", error);
@@ -34,7 +33,7 @@ const AttendanceManage = () => {
         formData.append("image", file);
 
         try {
-            const response = await axios.post("http://localhost:8000/ocr", formData, {
+            const response = await axios.post("https://attendancelist-be-4b43ae319fcf.herokuapp.com//ocr", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
