@@ -1,0 +1,50 @@
+.scanList {
+    margin-left: 15px;
+    display: flex;
+    .scanUser {
+        margin-left: 10px;
+    }
+}
+
+.matchingList {
+    display: flex;
+    align-items: center;
+    .matchingUser {
+        margin-left: 10px;
+    }
+}
+
+.exception {
+    display: flex;
+    align-items: center;
+    .exceptionUser {
+        margin-left: 5px;
+    }
+}
+
+.attendanceList {
+    border: 1px solid red;
+    width: 100%;
+    height: fit-content;
+
+    .list {
+        display: flex;
+        align-items: center;
+    }
+
+    .reddot {
+        color: red;
+    }
+    .silverdot {
+        color: silver;
+    }
+    .bluedot {
+        color: blue;
+    }
+    .excepdot {
+        color: black;
+    }
+    .username {
+        margin-left: 1%;
+    }
+}
