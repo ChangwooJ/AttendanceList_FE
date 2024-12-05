@@ -11,7 +11,7 @@ const AttendanceManage = () => {
 
     const fetchUserList = async () => {
         try {
-            const response = await axios.get("https://attendancelist-be-4b43ae319fcf.herokuapp.com/api/userlist");
+            const response = await axios.get("http://13.60.58.35:5000/api/userlist");
             setUserList(response.data); 
         } catch (error) {
             console.error("유저 목록 불러오기 실패:", error);
@@ -33,7 +33,7 @@ const AttendanceManage = () => {
         formData.append("image", file);
 
         try {
-            const response = await axios.post("https://attendancelist-be-4b43ae319fcf.herokuapp.com/ocr", formData, {
+            const response = await axios.post("http://13.60.58.35:5000/ocr", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
