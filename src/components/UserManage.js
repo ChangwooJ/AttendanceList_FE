@@ -14,7 +14,7 @@ const UserManage = ({ option }) => {
     const uploadUser = () => {
         console.log(userData);
         if(option === 'insert') {
-            axios.post('https://attendancelist-be-4b43ae319fcf.herokuapp.com//api/newuser', {
+            axios.post('https://attendancelist-be-4b43ae319fcf.herokuapp.com/api/newuser', {
                 username: userData.username,
                 color: userData.color,
             })
