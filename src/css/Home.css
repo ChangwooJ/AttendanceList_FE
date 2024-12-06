@@ -13,7 +13,7 @@ body, html {
 }
 
 .main_button_wrap {
-    width: 20%;
+    width: 60%;
     aspect-ratio: 1 / 0.5;
     margin-top: 2%;
     display: flex;

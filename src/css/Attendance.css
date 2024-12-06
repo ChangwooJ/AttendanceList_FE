@@ -4,7 +4,9 @@
 }
 
 .attendance_bt {
-    width: 50%;
+    font-size: 20px;
+    font-weight: 550;
+    width: 90%;
     height: 50%;
     background-color: transparent;
     border-radius: 10px;
@@ -17,7 +19,7 @@
 
 .upload_bt {
     box-sizing: border-box;
-    width: 50%;
+    width: 90%;
     height: 50%;
     border: 2px solid black;
     border-radius: 10px;
