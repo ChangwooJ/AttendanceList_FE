@@ -89,8 +89,8 @@ const AttendanceManage = () => {
     }
 
     return (
-        <div className="manage_wrap">
-            {!result && (<input type="file" accept="image/*" onChange={handleUploadImg} />)}
+        <React.Fragment>
+            {!result && (<div className="upload_bt"><input type="file" accept="image/*" onChange={handleUploadImg} /></div>)}
             {result && <div className="scanList">{result.map((res, index) => (
                 <p key={index} className="scanUser">
                     {res}
@@ -148,7 +148,7 @@ const AttendanceManage = () => {
                     </div>
                 </div>
             )}
-        </div>
+        </React.Fragment>
     );
 };
 

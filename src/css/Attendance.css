@@ -14,14 +14,13 @@
     cursor: pointer;
 }
 
-.manage_wrap {
+.upload_bt {
     box-sizing: border-box;
     width: 50%;
     height: 50%;
     border: 2px solid black;
     border-radius: 10px;
-    position: absolute;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
