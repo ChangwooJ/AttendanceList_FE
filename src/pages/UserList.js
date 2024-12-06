@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserManage from "../components/UserManage";
 
+import "../css/UserList.css";
+
 const UserList = () => {
     const [userList, setUserList] = useState([]);
     const [newUser, setNewUser] = useState(false);
@@ -28,10 +30,10 @@ const UserList = () => {
         return (
             <div>
                 {filteredUsers.map((user, index) => (
-                    <>
+                    <div className="userlist_wrap">
                         <div key={index}>{index + 1}: {user.username} {user.color}</div>
                         <button onClick={() => deleteUser(user.username)}>x</button>
-                    </>
+                    </div>
                 ))}
             </div>
         );
@@ -47,13 +49,20 @@ const UserList = () => {
         }
     };
 
+    const colorMap = {
+        "빨강색": "rgba(255, 0, 0, 0.3)",  // 빨강색 -> 빨간색 코드
+        "파랑색": "rgba(0, 0, 255, 0.3)",  // 파랑색 -> 파란색 코드
+        "은색": "rgba(192, 192, 192, 0.3)",    // 은색 -> 은색 코드
+        "그 외": "rgba(0, 0, 0, 0.3)",
+    };
+
     return (
         <React.Fragment>
-            UserList
+            <h4>UserList</h4>
             <button onClick={() => {setNewUser(true);}}>입소자</button>
             {newUser && (<UserManage option={"insert"} />)}
             {userColors.map(color => (
-                <div key={color}>
+                <div className="color_wrap" key={color} style={{ backgroundColor: colorMap[color] || "rgba(255, 255, 255, 0.3)" }}>
                     {filteringUser(color)}
                 </div>
             ))}
