@@ -9,7 +9,7 @@ const UserList = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('https://13.60.58.35:5000/api/userlist');
+                const response = await axios.get('https://goyang0360.o-r.kr/api/userlist');
                 setUserList(response.data);
             }
             catch (err) {
@@ -37,7 +37,7 @@ const UserList = () => {
 
     const deleteUser = async (username) => {
         try {
-            await axios.delete(`https://13.60.58.35:5000/api/deleteUser/${username}`);
+            await axios.delete(`https://goyang0360.o-r.kr/api/deleteUser/${username}`);
             setUserList(prevUserList => prevUserList.filter(user => user.username !== username));
             alert("삭제되었습니다.");
         } catch (error) {

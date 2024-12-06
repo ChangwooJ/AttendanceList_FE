@@ -14,7 +14,7 @@ const UserManage = ({ option }) => {
     const uploadUser = () => {
         console.log(userData);
         if(option === 'insert') {
-            axios.post('https://13.60.58.35:5000/api/newuser', {
+            axios.post('https://goyang0360.o-r.kr/api/newuser', {
                 username: userData.username,
                 color: userData.color,
             })
