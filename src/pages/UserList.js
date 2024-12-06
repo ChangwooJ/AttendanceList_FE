@@ -68,7 +68,7 @@ const UserList = () => {
 
     return (
         <React.Fragment>
-            <h4>UserList</h4>
+            <h4>UserList 총 인원: {userList.length}</h4>
             {!auth && (<button onClick={() => {setAdmin(true);}}>Admin Login</button>)}
             {auth && (<button onClick={() => {setNewUser(true);}}>입소자(유저 추가)</button>)}
             {admin && (<Admin onAuth={adminManage} />)}

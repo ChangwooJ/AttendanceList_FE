@@ -4,7 +4,7 @@
 }
 
 .attendance_bt {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 550;
     width: fit-content;
     height: fit-content;
@@ -35,4 +35,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.loading {
+    font-size: 12px;
+    color: gray;
 }

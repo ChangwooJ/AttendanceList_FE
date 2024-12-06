@@ -9,6 +9,7 @@ const AttendanceManage = () => {
     const [userList, setUserList] = useState([]);
     const [bestMatch, setBestMatch] = useState("");
     const [absentList, setAbsentList] = useState([]);
+    const [fileExist, setFileExist] = useState(false);
 
     const fetchUserList = async () => {
         try {
@@ -29,6 +30,8 @@ const AttendanceManage = () => {
             alert("이미지를 업로드해주세요.");
             return;
         }
+
+        setFileExist(true);
 
         const formData = new FormData();
         formData.append("image", file);
@@ -97,7 +100,12 @@ const AttendanceManage = () => {
 
     return (
         <React.Fragment>
-            {!result && (<div className="upload_bt"><input type="file" accept="image/*" onChange={handleUploadImg} /></div>)}
+            {!result && (
+                <div className="upload_bt">
+                    <input type="file" accept="image/*" onChange={handleUploadImg} />
+                    {fileExist && !result && (<p className="loading">인식중입니다. 잠시만 기다려주세요.</p>)}
+                </div>
+            )}
             {result && <div className="scanList">{result.map((res, index) => (
                 <p key={index} className="scanUser">
                     {res}
