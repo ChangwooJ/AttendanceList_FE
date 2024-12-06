@@ -69,7 +69,7 @@ const UserList = () => {
     return (
         <React.Fragment>
             <h4>UserList</h4>
-            <button onClick={() => {setAdmin(true);}}>Admin Login</button>
+            {!auth && (<button onClick={() => {setAdmin(true);}}>Admin Login</button>)}
             {auth && (<button onClick={() => {setNewUser(true);}}>입소자(유저 추가)</button>)}
             {admin && (<Admin onAuth={adminManage} />)}
             {newUser && (<UserManage option={"insert"} />)}
