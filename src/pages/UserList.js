@@ -32,7 +32,7 @@ const UserList = () => {
                 {filteredUsers.map((user, index) => (
                     <div className="userlist_wrap">
                         <div key={index}>{index + 1}: {user.username} {user.color}</div>
-                        <button onClick={() => deleteUser(user.username)}>x</button>
+                        <button className="delete_bt" onClick={() => deleteUser(user.username)}>x</button>
                     </div>
                 ))}
             </div>
@@ -59,7 +59,7 @@ const UserList = () => {
     return (
         <React.Fragment>
             <h4>UserList</h4>
-            <button onClick={() => {setNewUser(true);}}>입소자</button>
+            <button onClick={() => {setNewUser(true);}}>입소자(유저 추가)</button>
             {newUser && (<UserManage option={"insert"} />)}
             {userColors.map(color => (
                 <div className="color_wrap" key={color} style={{ backgroundColor: colorMap[color] || "rgba(255, 255, 255, 0.3)" }}>

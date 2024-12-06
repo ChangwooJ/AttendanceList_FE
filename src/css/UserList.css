@@ -1,8 +1,12 @@
 .color_wrap {
-    padding: 1% 0;
+    padding: 3% 0;
     text-indent: 10px;
 }
 
 .userlist_wrap {
     display: flex;
+    padding: 3% 0;
+    .delete_bt {
+        margin-left: 5px;
+    }
 }
