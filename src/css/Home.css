@@ -23,7 +23,8 @@ body, html {
         height: 90%;
         border-radius: 10px;
         border: none;
-        background-color: rgb(55, 55, 184);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        background-color: rgb(0, 0, 0);
         color: white;
         font-size: 18px;
         font-weight: 550;

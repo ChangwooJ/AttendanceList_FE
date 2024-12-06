@@ -1,6 +1,7 @@
 .scanList {
     margin-left: 15px;
     display: flex;
+    flex-wrap: wrap;
     .scanUser {
         margin-left: 10px;
     }
@@ -9,6 +10,7 @@
 .matchingList {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     .matchingUser {
         margin-left: 10px;
     }
@@ -34,27 +36,48 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        border-bottom: 1px solid white;
+    }
+
+    .list:last-child {
+        border: none;
     }
 
     .reddot {
-        color: red;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: red;
         border: 1px white solid;
         border-radius: 50%;
+        margin-right: 5px;
     }
     .silverdot {
-        color: silver;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: silver;
         border: 1px white solid;
         border-radius: 50%;
+        margin-right: 5px;
     }
     .bluedot {
-        color: blue;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: blue;
         border: 1px white solid;
         border-radius: 50%;
+        margin-right: 5px;
     }
     .excepdot {
-        color: black;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: black;
         border: 1px white solid;
         border-radius: 50%;
+        margin-right: 5px;
     }
     .username {
         margin-left: 2%;

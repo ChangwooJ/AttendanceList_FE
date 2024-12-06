@@ -119,28 +119,28 @@ const AttendanceManage = () => {
             {bestMatch && (
                 <div className="attendanceList">
                     <div className="list red">
-                        <p className="reddot">●</p>
+                        <span className="reddot"></span>
                         ({userList.filter((user) => user.color === "빨강색").length})
                         {userList.filter((user) => user.color === "빨강색").map(user => (
                             <p className="username">{user.username}</p>
                         ))}
                     </div>
                     <div className="list silver">
-                        <p className="silverdot">●</p>
+                        <span className="silverdot"></span>
                         ({userList.filter((user) => user.color === "은색").length})
                         {userList.filter((user) => user.color === "은색").map(user => (
                             <p className="username">{user.username}</p>
                         ))}
                     </div>
                     <div className="list blue">
-                        <p className="bluedot">●</p>
+                        <span className="bluedot"></span>
                         ({userList.filter((user) => user.color === "파랑색").length})
                         {userList.filter((user) => user.color === "파랑색").map(user => (
                             <p className="username">{user.username}</p>
                         ))}
                     </div>
                     <div className="list excep">
-                        <p className="excepdot">●</p>
+                        <span className="excepdot"></span>
                         ({userList.filter((user) => user.color === "그 외").length})
                         {userList.filter((user) => user.color === "그 외").map(user => (
                             <p className="username">{user.username}</p>
