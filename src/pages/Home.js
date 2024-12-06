@@ -8,7 +8,7 @@ const Home = () => {
 
     return (
         <div className="home_wrap">
-            <h2>출석자 분류 시스템</h2>
+            <h2>출석자 관리</h2>
             <div className="main_button_wrap">
                 <button className="attendance main_button" onClick={() => navigate("/attendance")}>출석자</button>
                 <button className="userlist main_button" onClick={() => navigate("/userlist")}>전체 명단</button>
