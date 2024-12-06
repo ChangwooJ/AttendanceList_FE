@@ -23,28 +23,40 @@
 }
 
 .attendanceList {
-    border: 1px solid red;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    background-color: black;
+    color: white;
     width: 100%;
+    font-weight: 550;
     height: fit-content;
 
     .list {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .reddot {
         color: red;
+        border: 1px white solid;
+        border-radius: 50%;
     }
     .silverdot {
         color: silver;
+        border: 1px white solid;
+        border-radius: 50%;
     }
     .bluedot {
         color: blue;
+        border: 1px white solid;
+        border-radius: 50%;
     }
     .excepdot {
         color: black;
+        border: 1px white solid;
+        border-radius: 50%;
     }
     .username {
-        margin-left: 1%;
+        margin-left: 2%;
     }
 }
