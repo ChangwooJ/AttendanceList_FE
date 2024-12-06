@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import UserManage from "../components/UserManage";
 import AttendanceManage from "../components/AttendanceManage";
 
+import "../css/Attendance.css";
+
 const Attendance = () => {
-    const [newUser, setNewUser] = useState(false);
     const [attendance, setAttendance] = useState(false);
 
     return (
-        <React.Fragment>
-            <button onClick={() => {setNewUser(true);}}>입소자</button>
-            {newUser && (<UserManage option={"insert"} />)}
-            <button onClick={() => {setAttendance(true);}}>사진 등록</button>
+        <div className="attendance_wrap">
+            {!attendance && (<button className="attendance_bt" onClick={() => {setAttendance(true);}}>사진 등록</button>)}
             {attendance && (<AttendanceManage />)}
-        </React.Fragment>
+        </div>
     )
 }
 

@@ -89,8 +89,8 @@ const AttendanceManage = () => {
     }
 
     return (
-        <div>
-            <input type="file" accept="image/*" onChange={handleUploadImg} />
+        <div className="manage_wrap">
+            {!result && (<input type="file" accept="image/*" onChange={handleUploadImg} />)}
             {result && <div className="scanList">{result.map((res, index) => (
                 <p key={index} className="scanUser">
                     {res}

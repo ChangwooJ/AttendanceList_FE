@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import UserManage from "../components/UserManage";
 
 const UserList = () => {
     const [userList, setUserList] = useState([]);
+    const [newUser, setNewUser] = useState(false);
 
     const userColors = [...new Set(userList.map(user => user.color))];
 
@@ -48,6 +50,8 @@ const UserList = () => {
     return (
         <React.Fragment>
             UserList
+            <button onClick={() => {setNewUser(true);}}>입소자</button>
+            {newUser && (<UserManage option={"insert"} />)}
             {userColors.map(color => (
                 <div key={color}>
                     {filteringUser(color)}
