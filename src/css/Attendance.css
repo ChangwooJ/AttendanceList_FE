@@ -1,9 +1,6 @@
 .attendance_wrap {
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .attendance_bt {
@@ -12,6 +9,10 @@
     background-color: transparent;
     border-radius: 10px;
     cursor: pointer;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .upload_bt {
@@ -24,4 +25,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
