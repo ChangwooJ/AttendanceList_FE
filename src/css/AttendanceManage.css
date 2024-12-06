@@ -1,4 +1,6 @@
 .scanList {
+    border: 1px solid black;
+    border-radius: 5px;
     margin-left: 15px;
     display: flex;
     flex-wrap: wrap;
@@ -8,6 +10,8 @@
 }
 
 .matchingList {
+    border: 1px solid black;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -17,6 +21,7 @@
 }
 
 .exception {
+    margin-left: 5px;
     display: flex;
     align-items: center;
     .exceptionUser {

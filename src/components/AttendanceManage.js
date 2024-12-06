@@ -8,6 +8,7 @@ const AttendanceManage = () => {
     const [result, setResult] = useState("");
     const [userList, setUserList] = useState([]);
     const [bestMatch, setBestMatch] = useState("");
+    const [absentList, setAbsentList] = useState([]);
 
     const fetchUserList = async () => {
         try {
@@ -80,12 +81,18 @@ const AttendanceManage = () => {
 
     const attendanceProcess = (results) => {
         const filteredResults = results.filter((result) => result.score !== null);
+
+        const absentUser = userList.filter((user) => 
+            filteredResults.some((result) => result.bestMatch === user.username)
+        );
+
+        setAbsentList(absentUser);  //결석자 명단
+
         const updatedUserList = userList.filter(
             (user) => !filteredResults.some((res) => res.bestMatch === user.username)
         );
     
-        setUserList(updatedUserList);
-        console.log(userList);
+        setUserList(updatedUserList);   //출석자 명단
     }
 
     return (
@@ -118,6 +125,7 @@ const AttendanceManage = () => {
             ))}</div>}
             {bestMatch && (
                 <div className="attendanceList">
+                    <p>출석자: </p>
                     <div className="list red">
                         <span className="reddot"></span>
                         ({userList.filter((user) => user.color === "빨강색").length})
@@ -143,6 +151,39 @@ const AttendanceManage = () => {
                         <span className="excepdot"></span>
                         ({userList.filter((user) => user.color === "그 외").length})
                         {userList.filter((user) => user.color === "그 외").map(user => (
+                            <p className="username">{user.username}</p>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {bestMatch && (
+                <div className="attendanceList">
+                    <p>결석자: </p>
+                    <div className="list red">
+                        <span className="reddot"></span>
+                        ({absentList.filter((user) => user.color === "빨강색").length})
+                        {absentList.filter((user) => user.color === "빨강색").map(user => (
+                            <p className="username">{user.username}</p>
+                        ))}
+                    </div>
+                    <div className="list silver">
+                        <span className="silverdot"></span>
+                        ({absentList.filter((user) => user.color === "은색").length})
+                        {absentList.filter((user) => user.color === "은색").map(user => (
+                            <p className="username">{user.username}</p>
+                        ))}
+                    </div>
+                    <div className="list blue">
+                        <span className="bluedot"></span>
+                        ({absentList.filter((user) => user.color === "파랑색").length})
+                        {absentList.filter((user) => user.color === "파랑색").map(user => (
+                            <p className="username">{user.username}</p>
+                        ))}
+                    </div>
+                    <div className="list excep">
+                        <span className="excepdot"></span>
+                        ({absentList.filter((user) => user.color === "그 외").length})
+                        {absentList.filter((user) => user.color === "그 외").map(user => (
                             <p className="username">{user.username}</p>
                         ))}
                     </div>
