@@ -1,0 +1,6 @@
+.AuthForm {
+    z-index: 3;
+    position: absolute;
+    width: 30%;
+    height: 30%;
+}

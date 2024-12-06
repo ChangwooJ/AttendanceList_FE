@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import UserManage from "../components/UserManage";
 
 import "../css/UserList.css";
+import Admin from "../components/admin";
 
 const UserList = () => {
     const [userList, setUserList] = useState([]);
     const [newUser, setNewUser] = useState(false);
+    const [admin, setAdmin] = useState(false);
+    const [auth, setAuth] = useState(false);
 
     const userColors = [...new Set(userList.map(user => user.color))];
 
@@ -32,7 +35,7 @@ const UserList = () => {
                 {filteredUsers.map((user, index) => (
                     <div className="userlist_wrap">
                         <div key={index}>{index + 1}: {user.username} {user.color}</div>
-                        <button className="delete_bt" onClick={() => deleteUser(user.username)}>x</button>
+                        {auth && (<button className="delete_bt" onClick={() => deleteUser(user.username)}>x</button>)}
                     </div>
                 ))}
             </div>
@@ -56,10 +59,19 @@ const UserList = () => {
         "그 외": "rgba(0, 0, 0, 0.3)",
     };
 
+    const adminManage = (auth) => {
+        if(auth === true) {
+            setAuth(true);
+            setAdmin(false);
+        }
+    }
+
     return (
         <React.Fragment>
             <h4>UserList</h4>
-            <button onClick={() => {setNewUser(true);}}>입소자(유저 추가)</button>
+            <button onClick={() => {setAdmin(true);}}>Admin Login</button>
+            {auth && (<button onClick={() => {setNewUser(true);}}>입소자(유저 추가)</button>)}
+            {admin && (<Admin onAuth={adminManage} />)}
             {newUser && (<UserManage option={"insert"} />)}
             {userColors.map(color => (
                 <div className="color_wrap" key={color} style={{ backgroundColor: colorMap[color] || "rgba(255, 255, 255, 0.3)" }}>
