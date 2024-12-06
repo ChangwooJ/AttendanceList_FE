@@ -1,0 +1,8 @@
+.color_wrap {
+    padding: 1% 0;
+    text-indent: 10px;
+}
+
+.userlist_wrap {
+    display: flex;
+}
