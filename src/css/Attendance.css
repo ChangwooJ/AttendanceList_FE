@@ -6,10 +6,13 @@
 .attendance_bt {
     font-size: 20px;
     font-weight: 550;
-    width: 90%;
-    height: 50%;
+    width: fit-content;
+    height: fit-content;
+    padding: 5%;
     background-color: transparent;
     border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     position: fixed;
     top: 50%;
@@ -19,10 +22,11 @@
 
 .upload_bt {
     box-sizing: border-box;
-    width: 90%;
-    height: 50%;
-    border: 2px solid black;
+    width: fit-content;
+    height: fit-content;
+    padding: 5%;
     border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     background-color: transparent;
     display: flex;
     align-items: center;
