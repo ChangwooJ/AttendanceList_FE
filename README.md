@@ -80,13 +80,3 @@ project-root/
 ```
 
 <br>
-
-## ERD
-
-```mermaid
-erDiagram
-    USER {
-        INT _id
-        STRING username
-        STRING color
-    }
