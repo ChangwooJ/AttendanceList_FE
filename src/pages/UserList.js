@@ -34,7 +34,17 @@ const UserList = () => {
             <div>
                 {filteredUsers.map((user, index) => (
                     <div className="userlist_wrap">
-                        <div key={index}>{index + 1}: {user.username} {user.color}</div>
+                        <div key={index}>
+                            <span 
+                            style={{
+                                display: "inline-block",
+                                width: "10px",
+                                height: "10px",
+                                backgroundColor: colorMap[color] || "rgba(0, 0, 0, 0.3)", // 색상 매핑
+                                borderRadius: "50%",
+                                marginRight: "8px"
+                            }}
+                        ></span>  {user.username}</div>
                         {auth && (<button className="delete_bt" onClick={() => deleteUser(user.username)}>x</button>)}
                     </div>
                 ))}
@@ -53,10 +63,10 @@ const UserList = () => {
     };
 
     const colorMap = {
-        "빨강색": "rgba(255, 0, 0, 0.3)",  // 빨강색 -> 빨간색 코드
-        "파랑색": "rgba(0, 0, 255, 0.3)",  // 파랑색 -> 파란색 코드
-        "은색": "rgba(192, 192, 192, 0.3)",    // 은색 -> 은색 코드
-        "그 외": "rgba(0, 0, 0, 0.3)",
+        "빨강색": "rgba(255, 0, 0)",  // 빨강색 -> 빨간색 코드
+        "파랑색": "rgba(0, 0, 255)",  // 파랑색 -> 파란색 코드
+        "은색": "rgba(192, 192, 192)",    // 은색 -> 은색 코드
+        "그 외": "rgba(0, 0, 0)",
     };
 
     const adminManage = (auth) => {
@@ -74,7 +84,7 @@ const UserList = () => {
             {admin && (<Admin onAuth={adminManage} />)}
             {newUser && (<UserManage option={"insert"} />)}
             {userColors.map(color => (
-                <div className="color_wrap" key={color} style={{ backgroundColor: colorMap[color] || "rgba(255, 255, 255, 0.3)" }}>
+                <div className="color_wrap" key={color} >
                     {filteringUser(color)}
                 </div>
             ))}
