@@ -1,6 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
+import Cropper from "cropperjs";
+import "cropperjs/dist/cropper.css";
 
 import "../css/AttendanceManage.css";
 
@@ -11,6 +13,8 @@ const AttendanceManage = () => {
     const [absentList, setAbsentList] = useState([]);
     const [fileExist, setFileExist] = useState(false);
     const [dots, setDots] = useState(""); // 점의 개수 상태
+    const [image, setImage] = useState(null);
+    const cropperRef = useRef(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
