@@ -145,13 +145,12 @@ const AttendanceManage = () => {
             <Cropper
               src={image}
               ref={cropperRef}
-              style={{ width: "100%", height: "auto" }}
-              aspectRatio={1} // 비율을 맞춰서 자르기
+              style={{ width: "80%", height: "auto" }}
               guides={false} // 자르기 가이드선 비활성화
               cropBoxResizable={true}
               cropBoxMovable={true}
             />
-            <button onClick={getCroppedImage}>편집된 이미지 미리보기</button>
+            <button onClick={() => getCroppedImage()}>편집된 이미지 미리보기</button>
           </div>
         )}
   
@@ -159,7 +158,7 @@ const AttendanceManage = () => {
           <div className="cropped-preview">
             <h3>편집된 이미지 미리보기:</h3>
             <img src={croppedImage} alt="Cropped preview" />
-            <button onClick={handleUploadCroppedImg}>편집된 이미지 서버에 전송</button>
+            <button onClick={() => handleUploadCroppedImg()}>편집된 이미지 서버에 전송</button>
           </div>
         )}
             {result && <div className="scanList">{result.map((res, index) => (
