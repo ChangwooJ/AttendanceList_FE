@@ -68,7 +68,7 @@ const AttendanceManage = () => {
     };
 
     // 서버로 이미지를 전송하는 함수
-    const handleUploadCroppedImg = async () => {
+    const handleUploadCroppedImg = async (formData) => {
         try {
             const response = await axios.post("https://goyang0360.o-r.kr/ocr", formData, {
                 headers: {
