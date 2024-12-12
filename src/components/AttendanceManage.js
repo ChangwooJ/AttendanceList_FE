@@ -63,7 +63,7 @@ const AttendanceManage = () => {
     
                 // 서버로 전송하는 부분을 추가합니다.
                 handleUploadCroppedImg(formData);
-            });
+            }, 'image/png');
         }
     };
 
