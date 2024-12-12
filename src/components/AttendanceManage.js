@@ -10,6 +10,15 @@ const AttendanceManage = () => {
     const [bestMatch, setBestMatch] = useState("");
     const [absentList, setAbsentList] = useState([]);
     const [fileExist, setFileExist] = useState(false);
+    const [dots, setDots] = useState(""); // 점의 개수 상태
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setDots((prev) => (prev.length < 3 ? prev + "." : ".")); // 점 3개까지 증가 후 초기화
+      }, 500); // 0.5초 간격으로 업데이트
+  
+      return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+    }, []);
 
     const fetchUserList = async () => {
         try {
@@ -103,7 +112,7 @@ const AttendanceManage = () => {
             {!result && (
                 <div className="upload_bt">
                     <input type="file" accept="image/*" onChange={handleUploadImg} />
-                    {fileExist && !result && (<p className="loading">인식중입니다. 잠시만 기다려주세요.</p>)}
+                    {fileExist && !result && (<p className="loading">인식중입니다. 잠시만 기다려주세요{dots}</p>)}
                 </div>
             )}
             {result && <div className="scanList">{result.map((res, index) => (
