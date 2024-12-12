@@ -1,3 +1,17 @@
+.image_cropper, .cropped_preview {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    .cropper_bt {
+        width: 30%;
+        margin-top: 5%;
+    }
+}
+
 .scanList {
     border: 1px solid black;
     border-radius: 5px;

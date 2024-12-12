@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
-import Cropper from "react-cropper"; // Cropper 컴포넌트
-import "cropperjs/dist/cropper.css"; // 스타일 파일 import
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 import "../css/AttendanceManage.css";
 
@@ -11,11 +11,11 @@ const AttendanceManage = () => {
     const [userList, setUserList] = useState([]);
     const [bestMatch, setBestMatch] = useState("");
     const [absentList, setAbsentList] = useState([]);
-    const [fileExist, setFileExist] = useState(false);
-    const [dots, setDots] = useState(""); // 점의 개수 상태
-    const [image, setImage] = useState(null); // 원본 이미지 상태
-    const [croppedImage, setCroppedImage] = useState(null); // 자른 이미지 상태
-    const cropperRef = useRef(null); // Cropper ref
+    const [fileExist, setFileExist] = useState(false); 
+    const [dots, setDots] = useState("");   //점의 개수 상태
+    const [image, setImage] = useState(null);   //원본 이미지
+    const [croppedImage, setCroppedImage] = useState(null);     //자른 이미지
+    const cropperRef = useRef(null);
   
   
     useEffect(() => {
@@ -53,8 +53,9 @@ const AttendanceManage = () => {
       // 이미지를 자른 후 croppedImage 상태 업데이트
       const getCroppedImage = () => {
         if (cropperRef.current) {
-          const croppedDataUrl = cropperRef.current.getCroppedCanvas().toDataURL();
+          const croppedDataUrl = cropperRef.current.cropper.getCroppedCanvas().toDataURL();
           setCroppedImage(croppedDataUrl); // 자른 이미지 저장
+          setImage(null);
         }
       };
     
@@ -67,7 +68,7 @@ const AttendanceManage = () => {
     
         const formData = new FormData();
         formData.append("image", croppedImage); // 자른 이미지를 폼에 첨부
-    
+        setCroppedImage(null);
         try {
           const response = await axios.post("https://goyang0360.o-r.kr/ocr", formData, {
             headers: {
@@ -131,7 +132,7 @@ const AttendanceManage = () => {
 
     return (
         <React.Fragment>
-        {!result && (
+        {!result && !croppedImage && !image && (
           <div className="upload_bt">
             <input type="file" accept="image/*" onChange={handleUploadImg} />
             {fileExist && !result && (
@@ -141,24 +142,24 @@ const AttendanceManage = () => {
         )}
   
         {image && (
-          <div className="image-cropper">
+          <div className="image_cropper">
             <Cropper
               src={image}
               ref={cropperRef}
-              style={{ width: "80%", height: "auto" }}
+              style={{ width: "100%", height: "auto"}}
               guides={false} // 자르기 가이드선 비활성화
               cropBoxResizable={true}
               cropBoxMovable={true}
             />
-            <button onClick={() => getCroppedImage()}>편집된 이미지 미리보기</button>
+            <button className="cropper_bt" onClick={() => getCroppedImage()}>자르기</button>
           </div>
         )}
   
         {croppedImage && (
-          <div className="cropped-preview">
-            <h3>편집된 이미지 미리보기:</h3>
-            <img src={croppedImage} alt="Cropped preview" />
-            <button onClick={() => handleUploadCroppedImg()}>편집된 이미지 서버에 전송</button>
+          <div className="cropped_preview">
+            <img src={croppedImage} alt="Cropped preview" 
+              style={{ width: "100%", height: "auto"}} />
+            <button className="cropper_bt" onClick={() => handleUploadCroppedImg()}>완료</button>
           </div>
         )}
             {result && <div className="scanList">{result.map((res, index) => (
