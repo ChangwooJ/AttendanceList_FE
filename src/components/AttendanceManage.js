@@ -56,7 +56,7 @@ const AttendanceManage = () => {
             cropperRef.current.cropper.getCroppedCanvas().toBlob((blob) => {
                 // Blob을 FormData에 추가합니다.
                 const formData = new FormData();
-                formData.append("image", blob, "cropped-image.png"); // 파일명 지정
+                formData.append("image", blob, "image"); // 파일명 지정
     
                 setCroppedImage(URL.createObjectURL(blob)); // 자른 이미지를 미리보기로 설정
                 setImage(null);
