@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
-import Cropper from "cropperjs";
-import "cropperjs/dist/cropper.css";
+import Cropper from "react-cropper"; // Cropper 컴포넌트
+import "cropperjs/dist/cropper.css"; // 스타일 파일 import
 
 import "../css/AttendanceManage.css";
 
@@ -13,21 +13,23 @@ const AttendanceManage = () => {
     const [absentList, setAbsentList] = useState([]);
     const [fileExist, setFileExist] = useState(false);
     const [dots, setDots] = useState(""); // 점의 개수 상태
-    const [image, setImage] = useState(null);
-    const cropperRef = useRef(null);
-
+    const [image, setImage] = useState(null); // 원본 이미지 상태
+    const [croppedImage, setCroppedImage] = useState(null); // 자른 이미지 상태
+    const cropperRef = useRef(null); // Cropper ref
+  
+  
     useEffect(() => {
-        const interval = setInterval(() => {
-            setDots((prev) => (prev.length < 3 ? prev + "." : ".")); // 점 3개까지 증가 후 초기화
-        }, 500); // 0.5초 간격으로 업데이트
-
-        return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+      const interval = setInterval(() => {
+        setDots((prev) => (prev.length < 3 ? prev + "." : ".")); // 점 3개까지 증가 후 초기화
+      }, 500); // 0.5초 간격으로 업데이트
+  
+      return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
     }, []);
 
     const fetchUserList = async () => {
         try {
             const response = await axios.get("https://goyang0360.o-r.kr/api/userlist");
-            setUserList(response.data);
+            setUserList(response.data); 
         } catch (error) {
             console.error("유저 목록 불러오기 실패:", error);
         }
@@ -37,64 +39,52 @@ const AttendanceManage = () => {
         fetchUserList();
     }, []);
 
-    const handleFileChange = (event) => {
+    const handleUploadImg = (event) => {
         const file = event.target.files[0];
         if (!file) {
-            alert("이미지를 업로드해주세요.");
-            return;
+          alert("이미지를 업로드해주세요.");
+          return;
         }
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            setImage(e.target.result); // 이미지를 base64로 설정
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const initializeCropper = () => {
-        const imageElement = document.getElementById("cropper-image");
-        if (cropperRef.current) {
-            cropperRef.current.destroy(); // 기존 인스턴스 정리
-        }
-        cropperRef.current = new Cropper(imageElement, {
-            viewMode: 1,
-            movable: true,
-            scalable: true,
-            zoomable: true,
-        });
-    };
-
-    const handleCrop = async () => {
-        if (cropperRef.current) {
-            cropperRef.current.getCroppedCanvas().toBlob((blob) => {
-                const formData = new FormData();
-                formData.append("image", blob, "cropped-image.jpg");
-
-                handleUploadImg(formData); // 크롭된 이미지를 업로드
-            });
-        }
-    };
-
-    const handleUploadImg = async (formData) => {
+    
         setFileExist(true);
-        try {
-            const response = await axios.post("https://goyang0360.o-r.kr/ocr", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-
-            const scanlist = response.data.text.replace(/[.,]/g, "").split(/\s+/).filter(Boolean);
-
-            setResult(scanlist || "텍스트를 찾을 수 없습니다.");
-            findSimilarUser(scanlist);
-        } catch (error) {
-            console.error("OCR 요청 실패:", error);
-            alert("OCR 처리 중 오류가 발생했습니다.");
+        setImage(URL.createObjectURL(file)); // 이미지 미리보기 설정
+      };
+    
+      // 이미지를 자른 후 croppedImage 상태 업데이트
+      const getCroppedImage = () => {
+        if (cropperRef.current) {
+          const croppedDataUrl = cropperRef.current.getCroppedCanvas().toDataURL();
+          setCroppedImage(croppedDataUrl); // 자른 이미지 저장
         }
-    };
+      };
+    
+      // 서버로 이미지를 전송하는 함수
+      const handleUploadCroppedImg = async () => {
+        if (!croppedImage) {
+          alert("편집된 이미지를 먼저 자르세요.");
+          return;
+        }
+    
+        const formData = new FormData();
+        formData.append("image", croppedImage); // 자른 이미지를 폼에 첨부
+    
+        try {
+          const response = await axios.post("https://goyang0360.o-r.kr/ocr", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+    
+          const scanlist = response.data.text.replace(/[.,]/g, "").split(/\s+/).filter(Boolean);
+          setResult(scanlist || "텍스트를 찾을 수 없습니다.");
+          findSimilarUser(scanlist);
+        } catch (error) {
+          console.error("OCR 요청 실패:", error);
+          alert("OCR 처리 중 오류가 발생했습니다.");
+        }
+      };
 
-    const findSimilarUser = (ocrText) => {
+    const findSimilarUser = (ocrText) => {        
         const options = {
             includeScore: true,
             threshold: 0.6,
@@ -118,7 +108,7 @@ const AttendanceManage = () => {
                 };
             }
         });
-
+    
         setBestMatch(results);
         attendanceProcess(results);
     };
@@ -126,7 +116,7 @@ const AttendanceManage = () => {
     const attendanceProcess = (results) => {
         const filteredResults = results.filter((result) => result.score !== null);
 
-        const absentUser = userList.filter((user) =>
+        const absentUser = userList.filter((user) => 
             filteredResults.some((result) => result.bestMatch === user.username)
         );
 
@@ -135,26 +125,43 @@ const AttendanceManage = () => {
         const updatedUserList = userList.filter(
             (user) => !filteredResults.some((res) => res.bestMatch === user.username)
         );
-
+    
         setUserList(updatedUserList);   //출석자 명단
     }
 
     return (
         <React.Fragment>
-            {!result && (
-                <div className="upload_bt">
-                    <input type="file" accept="image/*" onChange={handleFileChange} />
-                    {image && (
-                        <div className="crop-container">
-                            <img id="cropper-image" src={image} alt="To be cropped" onLoad={initializeCropper} />
-                            <button onClick={handleCrop}>편집 완료</button>
-                        </div>
-                    )}
-                    {fileExist && !result && (
-                        <p className="loading">인식중입니다. 잠시만 기다려주세요{dots}</p>
-                    )}
-                </div>
+        {!result && (
+          <div className="upload_bt">
+            <input type="file" accept="image/*" onChange={handleUploadImg} />
+            {fileExist && !result && (
+              <p className="loading">인식중입니다. 잠시만 기다려주세요{dots}</p>
             )}
+          </div>
+        )}
+  
+        {image && (
+          <div className="image-cropper">
+            <Cropper
+              src={image}
+              ref={cropperRef}
+              style={{ width: "100%", height: "auto" }}
+              aspectRatio={1} // 비율을 맞춰서 자르기
+              guides={false} // 자르기 가이드선 비활성화
+              cropBoxResizable={true}
+              cropBoxMovable={true}
+            />
+            <button onClick={getCroppedImage}>편집된 이미지 미리보기</button>
+          </div>
+        )}
+  
+        {croppedImage && (
+          <div className="cropped-preview">
+            <h3>편집된 이미지 미리보기:</h3>
+            <img src={croppedImage} alt="Cropped preview" />
+            <button onClick={handleUploadCroppedImg}>편집된 이미지 서버에 전송</button>
+          </div>
+        )}
             {result && <div className="scanList">{result.map((res, index) => (
                 <p key={index} className="scanUser">
                     {res}
@@ -162,7 +169,7 @@ const AttendanceManage = () => {
             ))}</div>}
             {bestMatch && <div className="matchingList">→ {bestMatch.map((bm, index) => (
                 <>
-                    {!bm.score &&
+                    {!bm.score && 
                         <p key={index} className="matchingUser">
                             {bm.bestMatch}
                         </p>}
